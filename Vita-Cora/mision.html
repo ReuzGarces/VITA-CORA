@@ -1,0 +1,107 @@
+<!doctype html>
+<html lang="es-CL">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <meta name="theme-color" content="#172e22">
+  <meta name="description" content="Simulador de entrenamiento para practicar cómo pedir ayuda en una misión espacial.">
+  <title>Simulador de misión · Vita-Cora</title>
+  <link rel="stylesheet" href="styles.css">
+  <link rel="stylesheet" href="orbital.css">
+  <script type="module" src="mision.js"></script>
+</head>
+<body>
+<a class="skip" href="#contenido">Saltar al contenido</a>
+<div class="shell">
+  <aside class="sidebar">
+    <a class="brand" href="./"><span class="brand-mark" aria-hidden="true"><svg class="icon" viewBox="0 0 24 24"><circle cx="12" cy="12" r="6"/><ellipse cx="12" cy="12" rx="11" ry="4" transform="rotate(-35 12 12)"/></svg></span><span><strong>Vita-Cora</strong><small>NASA SPACE APPS 2026</small></span></a>
+    <nav class="primary-nav" aria-label="Secciones">
+      <a class="nav-link" href="./"><span class="menu-pixel" aria-hidden="true">▦</span>Panel general</a>
+      <a class="nav-link" href="guia.html"><span class="menu-pixel" aria-hidden="true">▤</span>Guía interactiva</a>
+      <a class="nav-link" href="sintomas.html"><svg class="icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M3 12h4l3-6 4 12 3-6h4"/><rect x="2" y="3" width="20" height="18" rx="4"/></svg>Guía de síntomas</a>
+      <a class="nav-link" href="nutricion.html"><svg class="icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M3 3v6a3 3 0 0 0 6 0V3M6 3v18m13 0V3c-3 0-5 4-5 9h5"/></svg>Nutrición lunar</a>
+      <a class="nav-link selected" href="mision.html" aria-current="page"><span class="menu-pixel" aria-hidden="true">⚑</span>Simulador de misión</a>
+      <a class="nav-link" href="./#historial"><span class="menu-pixel" aria-hidden="true">▥</span>Historial</a>
+      <a class="nav-link" href="./#resumenes"><span class="menu-pixel" aria-hidden="true">▣</span>Resúmenes</a>
+    </nav>
+    <div class="side-footer"><div class="profile"><span class="profile-avatar" aria-hidden="true">A1</span><span><strong>Tripulante A-01</strong><small>Perfil simulado</small></span></div></div>
+  </aside>
+  <div class="workspace">
+    <header class="topbar">
+      <div class="breadcrumb"><span>Salud de la tripulación</span><strong>Simulador de misión</strong></div>
+      <span class="sim-label"><i></i> Modo de práctica</span>
+    </header>
+    <main class="main game-main" id="contenido">
+      <div class="game-heading">
+        <span class="game-kicker">EJERCICIO DE TRIPULACIÓN</span>
+        <h1>Alerta a bordo</h1>
+        <p>Practica cómo pedir ayuda ante una dificultad repentina para respirar.</p>
+      </div>
+      <div class="game-board">
+        <section class="game-stage card" aria-label="Escenario de la misión">
+          <div class="stage-top"><span>MÓDULO MÉDICO <small>· ARTE CON IA</small></span><span id="link-label">TIERRA · CON ENLACE</span></div>
+          <div class="stage-art">
+            <div class="signal-radar" aria-hidden="true"><i></i><b></b><span></span></div>
+            <div class="stage-context"><span id="stage-indicator">○</span><strong id="stage-label">Elige tu rol</strong></div>
+          </div>
+          <div class="connection"><label><input id="disconnect" type="checkbox"> Simular pérdida del enlace con Tierra</label><button class="button quiet" id="pause-game" type="button">Pausar animación</button></div>
+        </section>
+        <section class="card game-console" aria-labelledby="step-title">
+          <ol class="game-progress" aria-label="Progreso del ejercicio">
+            <li aria-current="step"><span>01</span>Situación</li>
+            <li><span>02</span>Aviso</li>
+            <li><span>03</span>Registro</li>
+            <li><span>04</span>Informe</li>
+          </ol>
+          <div class="step-live" aria-live="polite">
+            <h2 id="step-title" tabindex="-1"></h2>
+            <p id="step-copy"></p>
+          </div>
+          <div id="step-controls"></div>
+          <div class="game-tools" id="game-tools"><button type="button" class="text-button" id="game-back">Paso anterior</button><button type="button" class="text-button" id="game-restart">Reiniciar práctica</button></div>
+        </section>
+      </div>
+      <div class="card saved-case" id="saved-case" hidden>
+        <div><h2>Último informe de práctica</h2><p id="saved-status"></p></div>
+        <div><button type="button" class="button quiet" id="download-case">Descargar informe</button><button type="button" class="button quiet" id="deliver-case" hidden>Simular envío a Tierra</button></div>
+      </div>
+      <footer class="footer"><span>Simulación educativa. En una misión real, sigue el protocolo a bordo.</span><a class="text-button" href="https://www.nasa.gov/centers-and-facilities/ames/ames-science/ames-space-biosciences/a-clinical-decision-support-system-for-earth-independent-medical-operations/" target="_blank" rel="noopener">NASA · Atención médica sin apoyo inmediato de Tierra ↗</a></footer>
+    </main>
+  </div>
+</div>
+<template id="choose-role">
+  <div class="choice-stack">
+    <button class="game-choice" data-action="self" type="button"><span aria-hidden="true">▣</span><span><strong>Me cuesta respirar</strong><small>Reporto lo que me pasa.</small></span><span aria-hidden="true">›</span></button>
+    <button class="game-choice" data-action="crew" type="button"><span aria-hidden="true">✚</span><span><strong>Ayudo a un compañero</strong><small>Le cuesta respirar o parece que no responde.</small></span><span aria-hidden="true">›</span></button>
+  </div>
+</template>
+<template id="check-response">
+  <div class="choice-stack">
+    <button class="game-choice" data-action="responds" type="button"><span aria-hidden="true">▸</span><span><strong>Sí, responde</strong><small>Voy a pedir ayuda médica a bordo.</small></span><span aria-hidden="true">›</span></button>
+    <button class="game-choice urgent" data-action="unresponsive" type="button"><span aria-hidden="true">!</span><span><strong>No responde o no estoy seguro</strong><small>Activo la respuesta de emergencia a bordo.</small></span><span aria-hidden="true">›</span></button>
+  </div>
+</template>
+<template id="call-crew">
+  <p class="game-quote" data-role="callout"></p>
+  <p class="small-copy">Durante este ejercicio, la llamada se representa con el botón.</p>
+  <button type="button" class="button primary main-move" data-action="call">Simular aviso a bordo</button>
+</template>
+<template id="collect-data">
+  <form id="case-data">
+    <div class="split-fields"><label class="field-label">Módulo<select class="field" name="location"><option>Módulo de trabajo</option><option>Módulo de descanso</option><option>Módulo médico</option></select></label>
+    <label class="field-label">¿Cuándo empezó?<select class="field" name="onset"><option>Hace un momento</option><option>Hace unos minutos</option><option>No se sabe</option></select></label></div>
+    <label class="field-label">Oxímetro de dedo (opcional)<select class="field" name="reading"><option>No medida</option><option>Lectura simulada: 96 %</option><option>No hubo una lectura estable</option></select></label>
+    <p class="small-copy">Si el responsable a bordo solicita una lectura, puedes registrarla. Primero va el aviso.</p>
+    <button type="submit" class="button primary main-move">Revisar informe</button>
+  </form>
+</template>
+<template id="review-case">
+  <dl class="report-grid" data-role="report"></dl>
+  <button type="button" class="button primary main-move" data-action="save">Guardar informe y completar</button>
+</template>
+<template id="mission-complete">
+  <div class="mission-award"><span aria-hidden="true">★</span><div><strong>Práctica completada</strong><p>Pediste ayuda a bordo y dejaste un informe de lo ocurrido.</p></div></div>
+  <button type="button" class="button primary main-move" data-action="restart">Volver a practicar</button>
+</template>
+</body>
+</html>
